@@ -1,0 +1,6 @@
+CREATE TABLE animals (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(100),
+  atype VARCHAR(100),
+  age INTEGER
+);
