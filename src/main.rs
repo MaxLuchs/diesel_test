@@ -1,9 +1,5 @@
-use diesel::*;
 use std::env::var;
 use diesel_test::models::Animal;
-use diesel::pg::PgConnection;
-use diesel::prelude::*;
-use diesel_test::schema;
 use std::error::Error;
 use dotenv::*;
 use diesel_test::db::DAO;
@@ -15,7 +11,7 @@ fn main() -> std::result::Result<(), Box<dyn Error>> {
     let mut animals: Vec<Animal> = dao.get_all_animals();
     println!("animals : {:?}", animals);
 
-    animals = dao.get_animals_by_name("Esell");
+    animals = dao.get_animals_by_name("Esel");
     println!("animals : {:?}", animals);
     Ok(())
 }

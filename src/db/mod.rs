@@ -1,10 +1,8 @@
 use diesel::pg::PgConnection;
 use std::error::Error;
-use diesel::{ConnectionResult, Connection, Table};
-use diesel::*;
+use diesel::{ConnectionResult, Connection, ExpressionMethods, QueryDsl, RunQueryDsl};
 use crate::models::Animal;
-use crate::schema::animals::dsl::animals;
-use diesel::associations::HasTable;
+use crate::schema::*;
 
 pub struct DAO {
     con: PgConnection
@@ -18,11 +16,11 @@ impl DAO {
     }
 
     pub fn get_all_animals(&self) -> Vec<Animal> {
-        return animals.load(&self.con).unwrap();
+        return animals::table.load::<Animal>(&self.con).unwrap();
     }
 
     pub fn get_animals_by_name(&self, name: &str) -> Vec<Animal> {
-        return animals.filter(animals::name.eq(name)).load(&self.con).unwrap();
+        return animals::table.filter(animals::name.eq(name)).load::<Animal>(&self.con).unwrap();
     }
 }
 
