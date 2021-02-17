@@ -1,6 +1,21 @@
-CREATE TABLE animals (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(100),
-  atype VARCHAR(100),
-  age INTEGER
+CREATE TABLE species
+(
+    name VARCHAR PRIMARY KEY
+);
+
+CREATE TABLE zoos
+(
+    id     SERIAL PRIMARY KEY,
+    STREET VARCHAR NOT NULL,
+    GPS    VARCHAR,
+    NAME   VARCHAR NOT NULL
+);
+
+CREATE TABLE animals
+(
+    id      SERIAL PRIMARY KEY,
+    name    VARCHAR NOT NULL,
+    species VARCHAR NOT NULL REFERENCES species (name),
+    zoo_id  INTEGER NOT NULL REFERENCES zoos (id),
+    age     INTEGER NOT NULL
 );
