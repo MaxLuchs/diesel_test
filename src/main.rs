@@ -13,6 +13,12 @@ fn main() -> std::result::Result<(), Box<dyn Error>> {
 
     animals = dao.get_animals_by_name("Esel");
     println!("animals : {:?}", animals);
+
+    let mut animal = dao.get_first_animal(1);
+    println!("1st animal : {:?}", animal);
+
+    dao.insert_animal("Emil".to_owned(), 32, "Zoo Dortmund".to_owned(), "Kuh".to_owned());
+
     Ok(())
 }
 
