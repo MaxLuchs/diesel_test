@@ -19,6 +19,12 @@ fn main() -> std::result::Result<(), Box<dyn Error>> {
 
     dao.insert_animal("Emil".to_owned(), 32, "Zoo Dortmund".to_owned(), "Kuh".to_owned());
 
+    let count = dao.delete_animal_by_name("Emil".to_owned())?;
+    println!("Deleted {count} animals with name {name}", count = count, name = "Emil");
+
+    let count = dao.update_zoo_address("Zoo Dortmund".to_owned(), "Timbuktu Street".to_owned())?;
+    println!("Updated {count} zoos with new street {new_street}", count = count, new_street = "Emil");
+
     Ok(())
 }
 

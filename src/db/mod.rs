@@ -35,6 +35,15 @@ impl DAO {
         let result = animals::table.filter(animals::zoo_id.eq(zoo_id)).first::<Animal>(&self.con);
         return result.ok();
     }
+
+    pub fn delete_animal_by_name(&self, name: String) -> Result<usize, Box<dyn Error>> {
+        Ok(diesel::delete(animals::table.filter(animals::name.eq(&name))).execute(&self.con)?)
+    }
+
+    pub fn update_zoo_address(&self, zoo_name: String, new_address: String) -> Result<usize, Box<dyn Error>> {
+        let res = diesel::update(zoos::table.filter(zoos::name.eq(zoo_name))).set(zoos::street.eq(new_address)).execute(&self.con)?;
+        Ok(res)
+    }
 }
 
 pub fn get_con(db_url: String) -> Result<ConnectionResult<PgConnection>, Box<dyn Error>> {
