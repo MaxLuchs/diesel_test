@@ -3,11 +3,16 @@ name = "diesel_test"
 version = "0.1.0"
 authors = ["maxluchs"]
 edition = "2018"
+default-run = "main"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [[bin]]
 name = "main"
 path = "src/main.rs"
+
+[[bin]]
+name = "dbtest"
+path = "src/db_test.rs"
 
 [dependencies]
 diesel = { version = "1.4.5", features = ["postgres", "chrono"] }
