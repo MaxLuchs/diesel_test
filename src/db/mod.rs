@@ -44,6 +44,14 @@ impl DAO {
         let res = diesel::update(zoos::table.filter(zoos::name.eq(zoo_name))).set(zoos::street.eq(new_address)).execute(&self.con)?;
         Ok(res)
     }
+
+    pub fn get_all_animal_data(&self) -> Result<Vec<(Animal, Zoo)>, Box<dyn Error>> {
+        let animals = animals::table
+            .inner_join(zoos::table)
+            .load::<(Animal, Zoo)>(&self.con)?;
+        //println!("get_all_animals : {:?}", &animals);
+        return Ok(animals);
+    }
 }
 
 pub fn get_con(db_url: String) -> Result<ConnectionResult<PgConnection>, Box<dyn Error>> {
