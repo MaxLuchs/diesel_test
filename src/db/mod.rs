@@ -45,10 +45,11 @@ impl DAO {
         Ok(res)
     }
 
-    pub fn get_all_animal_data(&self) -> Result<Vec<(Animal, Zoo)>, Box<dyn Error>> {
+    pub fn get_all_animal_data(&self) -> Result<Vec<(Animal, Zoo, Species)>, Box<dyn Error>> {
         let animals = animals::table
             .inner_join(zoos::table)
-            .load::<(Animal, Zoo)>(&self.con)?;
+            .inner_join(species::table)
+            .load::<(Animal, Zoo, Species)>(&self.con)?;
         //println!("get_all_animals : {:?}", &animals);
         return Ok(animals);
     }
